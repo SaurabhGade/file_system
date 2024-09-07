@@ -29,14 +29,9 @@ bool add_file(vdisk *dsk, char *path){
     fseek(file, dsk->curr_size_block_number, SEEK_CUR);
     rewind(file); // file pointer at the beginning.
 
-    char data[file_size+MAX_FILE_NAME_LEN];
+    char data[file_size];
     fread(data, file_size, 1, file);        //read all bytes from the file and store in data.
-    char file_name[MAX_FILE_NAME_LEN];
-    trim_fname(file_name, path);
-    strcat(data, file_name); 
-    file_size += MAX_FILE_NAME_LEN+1;
-    printf("%s", data);
-
+    
     rewind(file);
     fseek(dsk->vd , dsk->curr_size_block_number, SEEK_SET);
     fwrite(buff, enc_seq_size, 1, dsk->vd);
