@@ -136,7 +136,7 @@ long long  search_file_name(vdisk dsk, char *file_name);
     returns nothing
     store given file in current directory if exist in vdisk.
 */
-void get_file(vdisk disk,  char *file_name);
+bool get_file(vdisk disk,  char *file_name);
 
 
 /*

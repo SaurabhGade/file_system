@@ -61,10 +61,15 @@ int main(){
   vdisk dsk = mount_vdisk("disk.vd");
   list_file(dsk);
   long long size = 0;
-  if((size = search_file_name(dsk, "make.pdf")) > 0){
+  if((size = search_file_name(dsk, "image.jpg")) > 0){
     printf("FILE EXIST and SIZE = %lld\n", size);
   }else{
     printf("FILE DOES NOT EXIST\n");
   }
+
+  if(get_file(dsk, "sdkfjs")){
+    printf("file extracted\n");
+  }
+
   return 0;
 }

@@ -25,5 +25,5 @@ long long  search_file_name(vdisk dsk, char *file_name){
         if(strcmp(file_name, fname) == 0)
             return fsize-MAX_FILE_NAME_LEN;
     }
-    return -1;
+    return 0;
 }

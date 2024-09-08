@@ -24,7 +24,7 @@ CFLAGS = -Wall -Wextra -I$(PDIR)/include -lm -g
 
 # Targets
 # all: prepare_dirs $(BIN_DIR)/test_bitop $(BIN_DIR)/test_disk_utils
-all: prepare_dirs $(BIN_DIR)/test_bitop $(BIN_DIR)/test_disk_utils $(BIN_DIR)/fadd $(BIN_DIR)/mkvd $(BIN_DIR)/diskinfo $(BIN_DIR)/vdls
+all: prepare_dirs $(BIN_DIR)/test_bitop $(BIN_DIR)/test_disk_utils $(BIN_DIR)/fadd $(BIN_DIR)/mkvd $(BIN_DIR)/diskinfo $(BIN_DIR)/vdls $(BIN_DIR)/fget
 
 
 #create directories, if not exist.
@@ -58,7 +58,8 @@ $(BIN_DIR)/diskinfo: $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/diskinfo.c
 $(BIN_DIR)/vdls: $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/vdls.c
 	$(CC) $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/vdls.c -o $@ $(CFLAGS)
 
-
+$(BIN_DIR)/fget: $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/get.c
+	$(CC) $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/get.c -o $@ $(CFLAGS)
 
 
 ###
