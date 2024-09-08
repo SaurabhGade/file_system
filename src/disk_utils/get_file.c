@@ -1,7 +1,7 @@
 /*
   read_file:
-    parems: struct vdisk, unsigned value indicating file number > 0
-    returns char array.
+    parems: vdisk disk, char *file_name
+    store named file in current directory if exist in vdisk. 
 */
 #include "../../include/disk_utils.h"
 void get_file(vdisk disk, char *file_name){

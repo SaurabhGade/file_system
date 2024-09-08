@@ -119,7 +119,23 @@ void get_file_name(char *dst, vdisk dsk, size_t skip_bytes);
 void list_file(vdisk vd);
 
 
+/*
+    search_file_name:
+      parems: vdisk dsk, char *file_name
+      return signed long long value which indicate file size descluding file name size.
+            rerun > 0 value if file exist.
+            else return -1 if file does not exist.
+            set file pointer at the beginning of the data.
+*/
+long long  search_file_name(vdisk dsk, char *file_name);
 
+
+/*
+  get_file:
+    parems: vdisk disk, char *file_name
+    returns nothing
+    store given file in current directory if exist in vdisk.
+*/
 void get_file(vdisk disk,  char *file_name);
 
 

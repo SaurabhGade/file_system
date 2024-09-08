@@ -6,7 +6,7 @@ bool add_file(vdisk *dsk, char *path){
     assert(dsk->vd != NULL);
     FILE *file = fopen(path, "r");
     if(file == NULL){
-        perror("NO SUCH FILE OR DIRECTORY\n");
+        printf("NO SUCH FILE OR DIRECTORY\n");
         return false;
     }
 
@@ -15,7 +15,7 @@ bool add_file(vdisk *dsk, char *path){
     file_size = (ftell(file) + MAX_FILE_NAME_LEN); /// got file size in bytes.
 
     if (dsk->free < file_size){         ///check disk status.
-        perror("DISK FULL!\n");
+        printf("STORAGE SPACE NOT AVAILABLE!\n");
         return false;
     }
     size_t enc_seq_size = 0;
@@ -32,7 +32,11 @@ bool add_file(vdisk *dsk, char *path){
 
     char file_name[MAX_FILE_NAME_LEN];
     trim_fname(file_name, path);
-    
+    if(search_file_name(*dsk, file_name) > 0){
+        printf("SAME FILE NAME ALREADY EXIST\n");
+        return false;
+    }
+
     char data[file_size];
     strcpy(data, file_name);    //16 bytes contain file name.
     fread(data+MAX_FILE_NAME_LEN, file_size, 1, file);        //read all bytes from the file and store in data.
