@@ -93,18 +93,39 @@ void update_disk(vdisk *dsk);
 */
 char* read_file(vdisk disk, size_t num);
 
-/*
-  unmount_disk:
-    parems: struct vdisk *
-    returns nothing.
-  unmount given vdisk.
-*/
 
+/*
+  trim_fname:
+    parems: char *destination , char *source
+    return nothing.
+    trim given string such that it removes all the path chars from the string.
+*/
 void trim_fname(char *dst, char *src);
+
+/*
+  get_file_name:
+    parems: char *destination, vdisk dsk, size_t number_of_bytes_skip_from_EOF
+    returns nothing.
+    returns the file name of the file. 
+*/
 void get_file_name(char *dst, vdisk dsk, size_t skip_bytes);
+
+/*
+  list_file:
+    parems: vdisk vd
+    returns nothing
+    print all the file present in given vdisk.
+*/
 void list_file(vdisk vd);
 
-void unmount_disk(vdisk *dsk);
 
+
+/*
+  unmount_disk:
+    parems: vdisk *dsk
+    return nothing
+    close all the open files.
+*/
+void unmount_disk(vdisk *dsk);
 
 #endif //_DISK_UTILS_H
