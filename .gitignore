@@ -1,6 +1,9 @@
-bin/*
-build/*
-*.out
-*.o
-/bin/disk.vd
-disk.vd
+bin/fadd
+bin/mkvd
+bin/vdls
+bin/diskinfo
+bin/test_disk_utils
+bin/test_bitop
+
+build/bitop/*.o
+build/disk_utils/*.o
