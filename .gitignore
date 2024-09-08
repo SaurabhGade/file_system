@@ -3,3 +3,4 @@ build/*
 *.out
 *.o
 /bin/disk.vd
+disk.vd
