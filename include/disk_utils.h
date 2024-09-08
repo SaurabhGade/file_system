@@ -10,7 +10,7 @@
 #define BYTE_SIZE 0x8 
 #define MAX_LEN 0xA       ///MAX encode_size SEQ LEN.
 
-#define MAX_FILE_NAME_LEN 15
+#define MAX_FILE_NAME_LEN 16 
 
 #define DISK_CAP_BLOCK_NO        0            // - 7
 #define DISK_FREE_BLOCK_NO       8            // - 15
@@ -99,7 +99,12 @@ char* read_file(vdisk disk, size_t num);
     returns nothing.
   unmount given vdisk.
 */
+
 void trim_fname(char *dst, char *src);
+void get_file_name(char *dst, vdisk dsk, size_t skip_bytes);
+void list_file(vdisk vd);
+
 void unmount_disk(vdisk *dsk);
+
 
 #endif //_DISK_UTILS_H

@@ -52,10 +52,13 @@ int main(){
   printf("EVERYTHING WORKING DISK_UTILS\n");
   return 0;
   */
-  size_t size;
+  // size_t size;
   // void *buff = encode_size(100, &size);
-  char name[MAX_FILE_NAME_LEN];
+  // char name[MAX_FILE_NAME_LEN];
   // trim_fname(name, "../somedir/../../somedir/f.txt");
-  trim_fname(name, "file_name.txt");
+  // trim_fname(name, "file_name.txt");
+
+  vdisk dsk = mount_vdisk("disk.vd");
+  list_file(dsk);
   return 0;
 }

@@ -12,7 +12,7 @@ bool add_file(vdisk *dsk, char *path){
 
     size_t file_size = 0;
     fseek(file, 0, SEEK_END);
-    file_size = ftell(file);            ///got file size in bytes.
+    file_size = (ftell(file) + MAX_FILE_NAME_LEN); /// got file size in bytes.
 
     if (dsk->free < file_size){         ///check disk status.
         perror("DISK FULL!\n");
@@ -20,6 +20,7 @@ bool add_file(vdisk *dsk, char *path){
     }
     size_t enc_seq_size = 0;
     void *buff = encode_size(file_size, &enc_seq_size); 
+
     if(dsk->curr_size_block_number + enc_seq_size >= dsk->curr_data_block_number-file_size){
         printf("DISK FULL!\n");
         return false;
@@ -29,9 +30,18 @@ bool add_file(vdisk *dsk, char *path){
     fseek(file, dsk->curr_size_block_number, SEEK_CUR);
     rewind(file); // file pointer at the beginning.
 
-    char data[file_size];
-    fread(data, file_size, 1, file);        //read all bytes from the file and store in data.
+    char file_name[MAX_FILE_NAME_LEN];
+    trim_fname(file_name, path);
     
+    char data[file_size];
+    strcpy(data, file_name);    //16 bytes contain file name.
+    fread(data+MAX_FILE_NAME_LEN, file_size, 1, file);        //read all bytes from the file and store in data.
+    
+
+    //insert file name at the end.
+    
+
+
     rewind(file);
     fseek(dsk->vd , dsk->curr_size_block_number, SEEK_SET);
     fwrite(buff, enc_seq_size, 1, dsk->vd);
