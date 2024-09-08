@@ -4,6 +4,7 @@ bin/vdls
 bin/diskinfo
 bin/test_disk_utils
 bin/test_bitop
+bin/disk.vd
 
 build/bitop/*.o
 build/disk_utils/*.o
