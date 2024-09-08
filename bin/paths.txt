@@ -1,0 +1,5 @@
+../test/make.pdf
+../test/nasmdoc.pdf
+../test/file5.txt
+../test/image.jpg
+../test/INVALID_PATH

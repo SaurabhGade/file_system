@@ -83,6 +83,7 @@ bool add_file(vdisk *dsk, char *path);
   update_disk attributes, before using this method must update attr of struct vdisk.
   update in disk header.
 */
+bool add_all_file(vdisk *dsk, char *path);
 void update_disk(vdisk *dsk);
 
 

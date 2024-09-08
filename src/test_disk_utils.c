@@ -57,8 +57,7 @@ int main(){
   // char name[MAX_FILE_NAME_LEN];
   // trim_fname(name, "../somedir/../../somedir/f.txt");
   // trim_fname(name, "file_name.txt");
-
-  vdisk dsk = mount_vdisk("disk.vd");
+  /*
   list_file(dsk);
   long long size = 0;
   if((size = search_file_name(dsk, "image.jpg")) > 0){
@@ -70,6 +69,10 @@ int main(){
   if(get_file(dsk, "sdkfjs")){
     printf("file extracted\n");
   }
+  */
 
+  vdisk dsk = mount_vdisk("disk.vd");
+  add_all_file(&dsk, "../test/file_path.txt");
+  unmount_disk(&dsk);
   return 0;
 }

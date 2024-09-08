@@ -6,7 +6,7 @@ bool add_file(vdisk *dsk, char *path){
     assert(dsk->vd != NULL);
     FILE *file = fopen(path, "r");
     if(file == NULL){
-        printf("NO SUCH FILE OR DIRECTORY\n");
+        printf(" NO SUCH FILE OR DIRECTORY\n");
         return false;
     }
 
@@ -33,7 +33,8 @@ bool add_file(vdisk *dsk, char *path){
     char file_name[MAX_FILE_NAME_LEN];
     trim_fname(file_name, path);
     if(search_file_name(*dsk, file_name) > 0){
-        printf("SAME FILE NAME ALREADY EXIST\n");
+        printf(" SAME FILE NAME ALREADY EXIST\n");
+        free(buff);
         return false;
     }
 

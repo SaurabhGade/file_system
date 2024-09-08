@@ -1,0 +1,4 @@
+../test/make.pdf
+../test/image.jpg
+../test/nasmdoc.pdf
+../test/file2.txt
