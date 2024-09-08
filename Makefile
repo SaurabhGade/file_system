@@ -70,6 +70,6 @@ run_test_disk_utils:
 
 clean:
 	rm -fv $(BUILD_BITOP)/*.o $(BUILD_DISK_UTILS)/*.o 
-
-	rm -fv $(BIN_DIR)/fadd $(BIN_DIR)/mkvd $(BIN_DIR)/diskinfo  $(BIN_DIR)/test_disk_utils $(BIN_DIR)/test_bitop
+	rm -fv $(BIN_DIR)/fadd $(BIN_DIR)/mkvd $(BIN_DIR)/diskinfo  $(BIN_DIR)/test_disk_utils $(BIN_DIR)/test_bitop $(BIN_DIR)/vdls
+	rm -fv $(BIN_DIR)/disk.vd
 
