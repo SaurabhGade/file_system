@@ -19,7 +19,7 @@ void list_file(vdisk dsk){
         skip_bytes += fsize;
         get_file_name(fname, dsk, skip_bytes);
         fname[MAX_FILE_NAME_LEN-1] = 0;
-        printf("%zu: %s\t\t%zu Bytes\n",i+1,  fname, fsize); 
+        printf("%zu: %s\t  %zu Bytes\n",i+1,  fname, fsize); 
     }
     return;
 }

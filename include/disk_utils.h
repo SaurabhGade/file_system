@@ -91,7 +91,7 @@ void update_disk(vdisk *dsk);
     parems: struct vdisk, unsigned value indicating file number > 0
     returns char array.
 */
-char* read_file(vdisk disk, size_t num);
+
 
 
 /*
@@ -118,6 +118,9 @@ void get_file_name(char *dst, vdisk dsk, size_t skip_bytes);
 */
 void list_file(vdisk vd);
 
+
+
+void get_file(vdisk disk,  char *file_name);
 
 
 /*
