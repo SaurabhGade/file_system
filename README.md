@@ -22,3 +22,5 @@ This project implements a simple file system in C with basic functionalities suc
 1. Clone the repository:
    ```bash
    git clone https://github.com/SaurabhGade/file_system.git
+   make
+   cd bin
