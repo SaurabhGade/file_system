@@ -2,4 +2,8 @@
 ../test/nasmdoc.pdf
 ../test/file5.txt
 ../test/image.jpg
-../test/INVALID_PATH
+../test/test_vid.mp4
+../test/file1.txt
+../test/file2.txt
+../test/file3.txt
+../test/file4.txt
