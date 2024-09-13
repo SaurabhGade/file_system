@@ -12,7 +12,7 @@ bool add_file(vdisk *dsk, char *path){
 
     size_t file_size = 0;
     fseek(file, 0, SEEK_END);
-    file_size = (ftell(file) + MAX_FILE_NAME_LEN); /// got file size in bytes.
+    file_size = (ftell(file) + MAX_FILE_NAME_LEN) ; /// got file size in bytes.
 
     if (dsk->free < file_size){         ///check disk status.
         printf("STORAGE SPACE NOT AVAILABLE!\n");
@@ -38,9 +38,8 @@ bool add_file(vdisk *dsk, char *path){
         return false;
     }
 
-    char data[file_size];
-    strcpy(data, file_name);    //16 bytes contain file name.
-    fread(data+MAX_FILE_NAME_LEN, file_size, 1, file);        //read all bytes from the file and store in data.
+    char data[1];
+    //fread(data+MAX_FILE_NAME_LEN, file_size, 1, file);        //read all bytes from the file and store in data.
     
 
     //insert file name at the end.
@@ -59,8 +58,13 @@ bool add_file(vdisk *dsk, char *path){
 
     rewind(dsk->vd);
     fseek(dsk->vd, dsk->curr_data_block_number - (file_size), SEEK_SET);
-    fwrite(data,file_size, 1 , dsk->vd);
-
+    fwrite(file_name,MAX_FILE_NAME_LEN, 1 , dsk->vd);
+    rewind(file);
+    fread(data, 1, 1, file);
+    while(!feof(file)){
+      fwrite(data,1, 1, dsk->vd);
+      fread(data, 1, 1, file);
+    }
     free(buff);         
 
     dsk->curr_data_block_number -= file_size;
