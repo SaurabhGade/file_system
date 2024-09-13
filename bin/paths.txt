@@ -7,3 +7,4 @@
 ../test/file2.txt
 ../test/file3.txt
 ../test/file4.txt
+../test/la_vid.mp4

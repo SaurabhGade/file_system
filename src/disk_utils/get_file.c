@@ -6,7 +6,7 @@
     NOTE: if file already exist in same directory the overwrite its contain.
 */
 #include "../../include/disk_utils.h"
-bool get_file(vdisk disk, char *file_name){
+bool get_file(vdisk disk, char *dst_name, char *file_name){
   assert(disk.vd != NULL);
   assert(file_name != NULL);
   long long file_size = 0;
@@ -17,7 +17,7 @@ bool get_file(vdisk disk, char *file_name){
   }
   // if file exist then file pointer size to first byte of file data.
 
-  FILE *ptr = fopen(file_name, "w");
+  FILE *ptr = fopen(dst_name, "w");
   if(ptr == NULL){
     printf("INTERNAL ERROR UNABLE TO CREATE FILE\n");
     return false;
