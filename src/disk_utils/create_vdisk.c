@@ -38,19 +38,23 @@ bool create_vdisk(char *path, size_t ndiskb){
     fwrite(&temp, sizeof(size_t), 1, vd);
 
     // Initila free space in the disk.    next 8 bytes.
-    temp = ndiskb-48; 
+    temp = ndiskb-FIRST_SIZE_SEQ; 
     fwrite(&temp, sizeof(size_t), 1, vd);
 
     // Initila occupied space in the disk.
-    temp = 48;
+    temp = FIRST_SIZE_SEQ;
     fwrite(&temp, sizeof(size_t), 1, vd); 
 
     // Initial file count in the disk.
     temp = 0;
     fwrite(&temp, sizeof(size_t), 1, vd); 
 
+    // current logically deleted file count in the disk.
+    temp = 0;
+    fwrite(&temp, sizeof(size_t), 1, vd);
+
     // curr_size_block_number
-    temp = 48; 
+    temp = FIRST_SIZE_SEQ; 
     fwrite(&temp, sizeof(size_t), 1, vd); 
 
     // curr_data_block_number

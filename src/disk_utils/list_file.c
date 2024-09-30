@@ -5,8 +5,9 @@ void list_file(vdisk dsk){
     size_t nxt_size = 0; 
     char fname[MAX_FILE_NAME_LEN];
     size_t skip_bytes = 0;
-    
-    for (size_t i = 0; i < dsk.file_count; i++){
+    char *delf = DELETED_FILE_NAME;
+    size_t counter = 1;
+    for (size_t i = 0; i < dsk.file_count+dsk.deleted; i++){
         size_t fsize = 0;
         rewind(dsk.vd);
         fseek(dsk.vd, FIRST_SIZE_SEQ+nxt_size, SEEK_SET);
@@ -19,7 +20,10 @@ void list_file(vdisk dsk){
         skip_bytes += fsize;
         get_file_name(fname, dsk, skip_bytes);
         fname[MAX_FILE_NAME_LEN-1] = 0;
-        printf("%zu: %s\t  %zu Bytes\n",i+1,  fname, fsize); 
+        if(strcmp(fname, delf) != 0){
+            printf("%zu: %s\t  %zu Bytes\n", counter, fname, fsize);
+            counter+=1;
+        }
     }
     return;
 }

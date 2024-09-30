@@ -25,8 +25,9 @@ CFLAGS = -Wall -Wextra -I$(PDIR)/include -lm -g
 # Targets
 # all: prepare_dirs $(BIN_DIR)/test_bitop $(BIN_DIR)/test_disk_utils
 #all: prepare_dirs $(BIN_DIR)/test_bitop $(BIN_DIR)/test_disk_utils $(BIN_DIR)/fadd $(BIN_DIR)/mkvd $(BIN_DIR)/diskinfo $(BIN_DIR)/vdls $(BIN_DIR)/fget $(BIN_DIR)/faddall
-all: prepare_dirs $(BIN_DIR)/fadd $(BIN_DIR)/mkvd $(BIN_DIR)/diskinfo $(BIN_DIR)/vdls $(BIN_DIR)/fget $(BIN_DIR)/faddall
+#all: prepare_dirs $(BIN_DIR)/fadd $(BIN_DIR)/mkvd $(BIN_DIR)/diskinfo $(BIN_DIR)/vdls $(BIN_DIR)/fget $(BIN_DIR)/faddall
 
+all: prepare_dirs $(BIN_DIR)/test_disk_utils $(BIN_DIR)/fadd $(BIN_DIR)/mkvd $(BIN_DIR)/diskinfo $(BIN_DIR)/vdls $(BIN_DIR)/fget $(BIN_DIR)/faddall $(BIN_DIR)/delete
 
 #create directories, if not exist.
 prepare_dirs:
@@ -43,8 +44,8 @@ $(BUILD_DISK_UTILS)/%.o: $(SRC_DIR)/disk_utils/%.c
 
 #$(BIN_DIR)/test_bitop: $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/test_bitop.c
 #	$(CC) $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/test_bitop.c -o $@ $(CFLAGS)
-#$(BIN_DIR)/test_disk_utils: $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/test_disk_utils.c
-#	$(CC) $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/test_disk_utils.c -o $@ $(CFLAGS)
+$(BIN_DIR)/test_disk_utils: $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/test_disk_utils.c
+	$(CC) $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/test_disk_utils.c -o $@ $(CFLAGS)
 
 ### new added.
 $(BIN_DIR)/fadd: $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/add.c
@@ -64,6 +65,9 @@ $(BIN_DIR)/fget: $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/get.c
 
 $(BIN_DIR)/faddall: $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/addall.c
 	$(CC) $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/addall.c -o $@ $(CFLAGS)
+
+$(BIN_DIR)/delete: $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/delete.c
+	$(CC) $(BITOP_OBJ) $(DISK_UTILS_OBJ) $(PDIR)/src/delete.c -o $@ $(CFLAGS)
 
 
 ###

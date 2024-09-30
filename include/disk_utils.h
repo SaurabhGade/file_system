@@ -6,29 +6,34 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define LIMITER 0x1
-#define BYTE_SIZE 0x8 
-#define MAX_LEN 0xA       ///MAX encode_size SEQ LEN.
+#define LIMITER             0x1
+#define BYTE_SIZE           0x8 
+#define MAX_LEN             0xA       ///MAX encode_size SEQ LEN.
 
-#define MAX_FILE_NAME_LEN 16 
+#define MAX_FILE_NAME_LEN   16 
+#define DELETED_FILE_NAME   "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"    // compiler append \0 at the end.
 
-#define DISK_CAP_BLOCK_NO        0            // - 7
-#define DISK_FREE_BLOCK_NO       8            // - 15
-#define DISK_OCCU_BLOCK_NO       16           // - 23
-#define DISK_FILE_COUNT_BLOCK_NO 24           // - 31
-#define DISK_CURR_SIZE_BLOCK_NO  32           // - 39
-#define DESK_CURR_DATA_BLOCK_NO  40           // - 47 
-#define FIRST_SIZE_SEQ           48           // - 
+#define DISK_CAP_BLOCK_NO                   0            // - 7
+#define DISK_FREE_BLOCK_NO                  8            // - 15
+#define DISK_OCCU_BLOCK_NO                  16           // - 23
+#define DISK_FILE_COUNT_BLOCK_NO            24           // - 31
+#define DISK_DELETED_FILE_COUNT_BLOCK_NO    32           // - 39 
+#define DISK_CURR_SIZE_BLOCK_NO             40           // - 47 
+#define DESK_CURR_DATA_BLOCK_NO             48           // - 55 
 
-// all attributies usable only for those vd which created using create_vdisk function of disk_utils 
+#define FIRST_SIZE_SEQ                      56           // -     // INDICATE FROM WHERE USERDATA SIZE WILL PLACED. 
+
+// all attributes usable only for those vd which created using create_vdisk function of disk_utils 
+
 typedef struct{
-  FILE *vd;         // file pointer pointing to the disk image.
-  size_t capacity;  // read firest 8 byte from the disk which indicate disk capacity.
+  FILE *vd;                         // file pointer pointing to the disk image.
+  size_t capacity;                  // read first 8 byte from the disk which indicate disk capacity.
   size_t free;
   size_t occupied;
-  size_t curr_size_block_number;    //contain block index which is currently free to store size
-  size_t curr_data_block_number;    //contain block index which is currently free to store data. 
-  size_t file_count;              //number of file currently in the disk. 
+  size_t deleted;                   // logically deleted files in vd.
+  size_t curr_size_block_number;    // contain block index which is currently free to store size
+  size_t curr_data_block_number;    // contain block index which is currently free to store data. 
+  size_t file_count;                // number of file currently in the disk. 
 } vdisk;
 
 struct sequence{
@@ -83,16 +88,31 @@ bool add_file(vdisk *dsk, char *path);
   update_disk attributes, before using this method must update attr of struct vdisk.
   update in disk header.
 */
-bool add_all_file(vdisk *dsk, char *path);
-void update_disk(vdisk *dsk);
-
 
 /*
-  read_file:
-    parems: struct vdisk, unsigned value indicating file number > 0
-    returns char array.
+  delete_file:
+    parems: vdisk *dsk, char *file_name
+    return bool
+  delete_file, logically delete file from given virtual disk.
+  its not remove file size and file data from disk.
+  **vdls will not list a deleted file.
 */
+bool delete_file(vdisk *dsk, char *fname);
 
+/*
+   add_all_file:
+    parems: take disk pointer and file which contain the path of other files.
+    return: return true if all the files insered. 
+*/
+bool add_all_file(vdisk *dsk, char *path);
+
+/*
+   update_disk:
+   parems: vdisk *dsk
+   update the disk attributes by the vdisk members data.
+   return nothing.
+*/
+void update_disk(vdisk *dsk);
 
 
 /*

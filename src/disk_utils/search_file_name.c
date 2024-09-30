@@ -9,7 +9,7 @@ long long  search_file_name(vdisk dsk, char *file_name){
     char fname[MAX_FILE_NAME_LEN];
     size_t skip_bytes = 0;
     
-    for (size_t i = 0; i < dsk.file_count; i++){
+    for (size_t i = 0; i < dsk.file_count + dsk.deleted; i++){
         size_t fsize = 0;
         rewind(dsk.vd);
         fseek(dsk.vd, FIRST_SIZE_SEQ+nxt_size, SEEK_SET);
@@ -25,5 +25,5 @@ long long  search_file_name(vdisk dsk, char *file_name){
         if(strcmp(file_name, fname) == 0)
             return fsize-MAX_FILE_NAME_LEN;
     }
-    return 0;
+    return -1;
 }

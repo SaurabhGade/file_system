@@ -27,6 +27,10 @@ vdisk mount_vdisk(char *path){
     fread(&disk_info, sizeof(disk_info), 1, dsk.vd); 
     dsk.file_count = disk_info;
 
+    // read logically deleted files in the disk.
+    fread(&disk_info, sizeof(size_t), 1, dsk.vd); 
+    dsk.deleted = disk_info;
+
     // read curr_size_block_number
     fread(&disk_info, sizeof(disk_info), 1, dsk.vd); 
     dsk.curr_size_block_number = disk_info;
